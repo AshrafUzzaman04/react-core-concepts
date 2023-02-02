@@ -2,6 +2,7 @@
 
 import logo from "./logo.svg";
 import "./App.css";
+import { useState } from "react";
 
 function App() {
   var details = "I'm a react person";
@@ -33,7 +34,7 @@ function App() {
     "anwar",
     "jannat",
     "nafi",
-    "sumi",
+    "shumi",
   ];
 
   return (
@@ -45,6 +46,7 @@ function App() {
           <li>{object.occopation}</li>
         </ul>
         <span>My total math total number is {(5 + 5) * 9}</span>
+        <Counter></Counter>
 
         <ul>
           {friends.map((friend) => (
@@ -89,6 +91,15 @@ function Person(props) {
       <span>nayok: {props.nayok}</span>
       <br />
       <span>hero of {props.naika}</span>
+    </div>
+  );
+}
+
+function Counter() {
+  const [count, setCount] = useState(999);
+  return (
+    <div>
+      <h1>Count: {count}</h1>
     </div>
   );
 }
