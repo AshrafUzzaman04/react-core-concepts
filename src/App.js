@@ -2,7 +2,7 @@
 
 import logo from "./logo.svg";
 import "./App.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function App() {
   var details = "I'm a react person";
@@ -47,6 +47,7 @@ function App() {
         </ul>
         <span>My total math total number is {(5 + 5) * 9}</span>
         <Counter></Counter>
+        <Users></Users>
 
         <ul>
           {friends.map((friend) => (
@@ -95,17 +96,54 @@ function Person(props) {
   );
 }
 
+// counter in react
 function Counter() {
-  const [count, setCount] = useState(999);
+  const [count, setCount] = useState(0);
+  const handleIcrease = () => {
+    // const newCount = count + 1;
+    setCount(count + 1);
+  };
+  const handleDecrease = () => {
+    setCount(count - 1);
+  };
   return (
     <div>
       <h1>Count: {count}</h1>
+      <button onClick={handleIcrease}>Increase</button>
+      <button onMouseMove={handleIcrease}>Increase</button>
+      <button onMouseMove={handleDecrease}>Decrease</button>
+    </div>
+  );
+}
+
+// user fetch and useEffect
+function Users() {
+  const [users, setUser] = useState([]);
+  useEffect(() => {
+    fetch("https://jsonplaceholder.typicode.com/users")
+      .then((response) => response.json())
+      .then((data) => {
+        setUser(data);
+      });
+  });
+  return (
+    <div>
+      <h3>All Json Users</h3>
+      <ul>
+        {users.map((user) => (
+          <li>{user.email}</li>
+        ))}
+      </ul>
     </div>
   );
 }
 
 function Products(props) {
   const { name, prize } = props.products;
+  const [count, setCount] = useState(0);
+  const howMuchCount = () => {
+    setCount(count + 1);
+  };
   return (
     <div
       style={{
@@ -121,7 +159,10 @@ function Products(props) {
       <h2>Name: {name}</h2>
       <h2>Prize: {prize}</h2>
       <h2>object: {props.object}</h2>
-      <button style={{ cursor: "pointer" }}>Buy Now</button>
+      <button onClick={howMuchCount} style={{ cursor: "pointer" }}>
+        Buy Now
+      </button>
+      <span>order: {count}</span>
     </div>
   );
 }
