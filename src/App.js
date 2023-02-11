@@ -48,6 +48,7 @@ function App() {
         <span>My total math total number is {(5 + 5) * 9}</span>
         <Counter></Counter>
         <Users></Users>
+        <RandomUser></RandomUser>
 
         <ul>
           {friends.map((friend) => (
@@ -163,6 +164,29 @@ function Products(props) {
         Buy Now
       </button>
       <span>order: {count}</span>
+    </div>
+  );
+}
+
+function RandomUser() {
+  const [rand, setRand] = useState();
+  useEffect(() => {
+    fetch("https://randomuser.me/api/")
+      .then((response) => response.json())
+      .then((data) => setRand(data));
+  }, []);
+  console.log(rand);
+  const style = {
+    listStyle: "none",
+    color: "red",
+    border: "1px solid #fff",
+    padding: "20px",
+  };
+  return (
+    <div>
+      {rand.map((random) => (
+        <li style={style}>{random.results.gender}</li>
+      ))}
     </div>
   );
 }
