@@ -173,7 +173,7 @@ function RandomUser() {
   useEffect(() => {
     fetch("https://randomuser.me/api/")
       .then((response) => response.json())
-      .then((data) => setRand(data));
+      .then((data) => setRand(data.results));
   }, []);
   console.log(rand);
   const style = {
@@ -184,8 +184,8 @@ function RandomUser() {
   };
   return (
     <div>
-      {rand.map((random) => (
-        <li style={style}>{random.results.gender}</li>
+      {rand?.map((random) => (
+        <li style={style}>{random.gender}</li>
       ))}
     </div>
   );
