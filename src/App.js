@@ -169,13 +169,12 @@ function Products(props) {
 }
 
 function RandomUser() {
-  const [rand, setRand] = useState();
+  const [rand, setRand] = useState([]);
   useEffect(() => {
     fetch("https://randomuser.me/api/")
       .then((response) => response.json())
       .then((data) => setRand(data.results));
   }, []);
-  console.log(rand);
   const style = {
     listStyle: "none",
     color: "red",
@@ -184,8 +183,10 @@ function RandomUser() {
   };
   return (
     <div>
-      {rand?.map((random) => (
-        <li style={style}>{random.gender}</li>
+      {rand.map((random, i) => (
+        <li key={i} style={style}>
+          {random.name.title}. {random.name.first} {random.name.last}
+        </li>
       ))}
     </div>
   );
